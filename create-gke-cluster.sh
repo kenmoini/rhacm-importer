@@ -54,3 +54,6 @@ else
     echo "GKE cluster already exists..."
     exit 1
 fi
+
+echo "GKE cluster created successfully!"
+echo "API Endpoint: https://$(gcloud container clusters describe my-gke-cluster --location us-central1-c --format json | jq -r .privateClusterConfig.publicEndpoint)"
