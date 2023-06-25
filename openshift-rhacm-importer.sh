@@ -18,7 +18,13 @@ API_ENDPOINT=$(oc whoami --show-server)
 
 # Apply the openshift-rhacm-importer.yaml file
 echo "Creating import resources..."
-oc apply -f openshift-rhacm-importer.yaml
+# Check if online was passed to the script
+if [[ $1 == "offline" ]]
+then
+    oc apply -f openshift-rhacm-importer.yaml
+else
+    oc apply -f https://raw.githubusercontent.com/kenmoini/rhacm-importer/main/openshift-rhacm-importer.yaml
+fi
 
 SA_TOKEN=$(oc -n kube-system get secret $(kubectl -n kube-system get serviceaccount/mcm-cluster-importer -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}' | base64 -d)
 

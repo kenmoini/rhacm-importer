@@ -21,3 +21,25 @@ Assuming you're running this out of a Cloud Shell, all that you need to do is au
 4. Run the script: `curl -sSL https://raw.githubusercontent.com/kenmoini/rhacm-importer/main/configure-xks.sh | bash -`
 
 If you placed the Red Hat Registry Pull Secret in an alternative location, you can export the `RH_PULL_SECRET_FILE` environmental variable defining that path before running the script: `export RH_PULL_SECRET_FILE="/path/to/pull-secret.json`
+
+## Usage - openshift-rhacm-importer.sh
+
+If you're importing an existing OpenShift cluster into RHACM you can do so by running some huge copy/paste commaned that fails on most shells, paste in a kubeadmin file, or point it to an API endpoint with a Token to access it - `openshift-rhacm-importer.{sh,yaml}` help you do that last one.
+
+Applying the YAML will create all the resources needed to do an API/Token import, but running the Bash script will apply the YAML and give you the API endpoint and Token as output.
+
+```bash
+# Log into the cluster
+oc login ...
+
+# Run the script while online
+curl -sSL https://raw.githubusercontent.com/kenmoini/rhacm-importer/main/openshift-rhacm-importer.sh | bash -
+
+# Or if needing to do it "offline"
+
+# Clone the repo
+git clone https://github.com/kenmoini/rhacm-importer.git
+
+# Run the script
+./rhacm-importer/openshift-rhacm-importer.sh offline
+```
