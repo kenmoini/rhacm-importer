@@ -5,7 +5,7 @@
 #  and then returns the API Endpoint and ServiceAccount Token that can be used to import the cluster.
 
 # Check to see if we're logged into a cluster
-LOGIN_CHECK=$(oc whoami 2>&1 | grep "error" | wc -l)
+LOGIN_CHECK=$(oc whoami 2>&1 | grep "Error from server" | wc -l)
 
 if [[ $LOGIN_CHECK -ne 0 ]]
 then
@@ -25,5 +25,5 @@ SA_TOKEN=$(oc -n kube-system get secret $(kubectl -n kube-system get serviceacco
 echo -e "\nDone!  Use the following to import the cluster into Red Hat Advanced Cluster Management for Kubernetes:"
 
 echo -e "\nAPI Endpoint: $API_ENDPOINT"
-echo -e "\nToken:\n\n"
+echo -e "\nToken:\n"
 echo $SA_TOKEN
