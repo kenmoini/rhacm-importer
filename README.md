@@ -43,3 +43,29 @@ git clone https://github.com/kenmoini/rhacm-importer.git
 # Run the script
 ./rhacm-importer/openshift-rhacm-importer.sh offline
 ```
+
+## Usage - Create GKE Cluster
+
+In case you need a quick GKE cluster to test this against, you can run a script to create a GKE cluster.
+
+```bash
+# Export the GCP project name
+export GCP_PROJECT="YOUR_PROJECT_NAME"
+
+# Run the creation script - compatible with RHDP GKE Open Environments
+curl -sSL https://raw.githubusercontent.com/kenmoini/rhacm-importer/main/create-gke-cluster.sh | bash -
+```
+
+There are some additional variables that can be set to alter the behavior of the script before running it:
+
+```bash
+# Below are the defaults set in the script
+
+export GCP_PROJECT="SET-A-PROJECT-NAME"
+export GKE_VPC_NAME="gke-vpc"
+export GKE_CLUSTER_NAME="my-gke-cluster"
+export GKE_CLUSTER_REGION="us-central1"
+export GKE_CLUSTER_LOCATION="us-central1-c"
+export GKE_CLUSTER_NODE_COUNT="3"
+export GKE_CLUSTER_NODE_TYPE="e2-standard-8"
+```
