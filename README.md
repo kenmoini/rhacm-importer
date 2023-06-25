@@ -4,7 +4,10 @@ This repository has a few helpful scripts that can be used to connect an OpenShi
 
 The primary script, `configure-xks.sh` will configure an active Kubernetes context with all the needed Namespaces, ServiceAccounts, and Image Pull Secrets needed to connect to RHACM.  All that is required is the creation of a JSON file holding your Red Hat Registry Pull Secret.
 
-There are additional scripts such as `create-gke-cluster.sh` that can be used to quickly create a GKE cluster for testing with RHACM.  There is also a `openshift-rhacm-importer.sh` and paired `openshift-rhacm-importer.yaml` files that can be applied to any Red Hat OpenShift cluster to quickly and easily import an OpenShift cluster into RHACM via an API/Token combination.
+There are additional scripts such as:
+
+- `create-gke-cluster.sh` - Quickly create a GKE cluster for testing with RHACM.
+- `openshift-rhacm-importer.sh` that can be applied to any Red Hat OpenShift cluster to quickly and easily import an OpenShift cluster into RHACM via an API/Token combination.
 
 ## Prerequisites
 
@@ -24,7 +27,7 @@ If you placed the Red Hat Registry Pull Secret in an alternative location, you c
 
 ## Usage - openshift-rhacm-importer.sh
 
-If you're importing an existing OpenShift cluster into RHACM you can do so by running some huge copy/paste commaned that fails on most shells, paste in a kubeadmin file, or point it to an API endpoint with a Token to access it - `openshift-rhacm-importer.{sh,yaml}` help you do that last one.
+If you're importing an existing OpenShift cluster into RHACM you can do so by running some huge copy/paste command that fails on most shells, paste in a kubeadmin file, or point it to an API endpoint with a Token to access it - `openshift-rhacm-importer.{sh,yaml}` helps you do that last one.
 
 Applying the YAML will create all the resources needed to do an API/Token import, but running the Bash script will apply the YAML and give you the API endpoint and Token as output.
 
@@ -44,9 +47,9 @@ git clone https://github.com/kenmoini/rhacm-importer.git
 ./rhacm-importer/openshift-rhacm-importer.sh offline
 ```
 
-## Usage - Create GKE Cluster
+## Usage - create-gke-cluster.sh
 
-In case you need a quick GKE cluster to test this against, you can run a script to create a GKE cluster.
+In case you need a quick GKE cluster to test this against, you can run a script to create a GKE cluster.  It's easiest to run it in the Google Cloud Shell.
 
 ```bash
 # Export the GCP project name
