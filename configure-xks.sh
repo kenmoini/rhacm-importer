@@ -70,10 +70,22 @@ kubectl create clusterrolebinding rhacm-connector-binding --clusterrole=cluster-
 
 # Get the Cluster API Endpoint
 
+# Create a Token Secret
+echo -e "\nCreating token secret..."
+kubectl apply -n rhacm-connector -f - <<EOF
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rhacm-connector-token
+  annotations:
+    kubernetes.io/service-account.name: rhacm-connector
+type: kubernetes.io/service-account-token
+EOF
 
 # Get the ServiceAccount token for the rhacm-connector SA
 echo -e "\nGetting rhacm-connector SA token...\n"
-SA_TOKEN=$(kubectl -n rhacm-connector get secret $(kubectl -n rhacm-connector get serviceaccount/rhacm-connector -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}' | base64 -d)
+SA_TOKEN=$(kubectl -n rhacm-connector get secret rhacm-connector-token -o jsonpath='{.data.token}' | base64 -d)
 
 echo $SA_TOKEN
 
