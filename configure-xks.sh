@@ -69,6 +69,7 @@ echo -e "\nCreating rhacm-importer ClusterRoleBinding..."
 kubectl create clusterrolebinding rhacm-connector-binding --clusterrole=cluster-admin --serviceaccount=rhacm-connector:rhacm-connector
 
 # Get the Cluster API Endpoint
+API_ENDPOINT=$(kubectl config view --minify --output jsonpath="{.clusters[*].cluster.server}")
 
 # Create a Token Secret
 echo -e "\nCreating token secret..."
@@ -87,6 +88,7 @@ EOF
 echo -e "\nGetting rhacm-connector SA token...\n"
 SA_TOKEN=$(kubectl -n rhacm-connector get secret rhacm-connector-token -o jsonpath='{.data.token}' | base64 -d)
 
-echo $SA_TOKEN
+echo -e "\nAPI Server: $API_ENDPOINT"
+echo -e "\nToken: $SA_TOKEN"
 
 echo -e "\nDone!"
